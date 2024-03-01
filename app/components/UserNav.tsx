@@ -12,29 +12,41 @@ import {
 import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu'
 import { signOut } from 'next-auth/react'
 
-export default function UserNav () {
+interface iAppProps {
+  name: string
+  avatar?: string
+  email: string
+}
+
+export default function UserNav ({ name, avatar, email }: iAppProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='relative h-10 w-10 rounded-sm'>
           <Avatar className='h-10 w-10 rounded-sm'>
-            <AvatarImage src='https://lxsozdfjrurftcvxamro.supabase.co/storage/v1/object/public/user%20image/avatar.png' />
-            <AvatarFallback className='rounded-sm'>kas</AvatarFallback>
+            {avatar
+              ? <AvatarImage src={avatar} />
+              : (
+                <AvatarImage src='https://lxsozdfjrurftcvxamro.supabase.co/storage/v1/object/public/user%20image/avatar.png' />
+              )}
+            <AvatarFallback className='rounded-sm'>
+              {name.substring(0, 2).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className='w-56' align='end' forceMount>
+      <DropdownMenuContent className='w-56 p-2' align='end' forceMount>
         <DropdownMenuLabel>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>Kas</p>
+            <p className='text-sm font-medium leading-none'>{name}</p>
             <p className='text-xs leading-none text-muted-foreground'>
-              asdfasd@email.com
+              {email}
             </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>
+        <DropdownMenuItem onClick={() => signOut()} className='cursor-pointer'>
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

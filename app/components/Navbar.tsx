@@ -20,7 +20,13 @@ const links: linkProps[] = [
   { name: 'My List', href: '/home/user/list' }
 ]
 
-export default function Navbar () {
+interface iAppProps {
+  name: string
+  avatar: string
+  email: string
+}
+
+export default function Navbar ({ name, avatar, email }: iAppProps) {
   const pathName = usePathname()
 
   return (
@@ -61,7 +67,7 @@ export default function Navbar () {
       <div className='flex items-center gap-x-8'>
         <Search className='w-5 h-5 text-gray-300 cursor-pointer' />
         <Bell className='w-5 h-5 text-gray-300 cursor-pointer' />
-        <UserNav />
+        <UserNav name={name} email={email} avatar={avatar} />
       </div>
     </div>
   )
