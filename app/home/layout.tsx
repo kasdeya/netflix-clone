@@ -13,14 +13,12 @@ export default async function HomeLayout (
     return redirect('/login')
   }
 
-  console.log(session)
-
   return (
     <>
       <Navbar
-        name={session.user?.name}
-        avatar={session.user?.image}
-        email={session.user?.email}
+        name={session.user?.name as string}
+        avatar={session.user?.image as string}
+        email={session.user?.email as string}
       />
       <main className='w-full max-w-7xl mx-auto sm:px-6 lg:px-8'>
         {children}
