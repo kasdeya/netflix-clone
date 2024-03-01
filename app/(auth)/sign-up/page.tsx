@@ -1,10 +1,12 @@
 import { authOptions } from '@/app/utils/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { GithubIcon } from 'lucide-react'
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import GoogleIcon from '../../../public/google.svg'
 
 export default async function SignUp () {
   const session = await getServerSession(authOptions)
